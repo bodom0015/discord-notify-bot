@@ -22,12 +22,20 @@ Open up config.js and make sure to set all of the appropriate fields:
 * WATCHED_CHANNELS
 * BOT_TOKEN
 
-## The Weird Part: Generating a new bot token
+
+This will involve setting up a Bot User and adding it to the server.
+
+For more details on the restrictions placed on Bot Users, see https://twentysix26.github.io/Red-Docs/red_guide_bot_accounts/
+
+## The Easy Part: Generating a new bot token
 Visit https://discordapp.com/developers/applications/me to generate a new bot token.
 
 Click on "New App", fill in a name/description, choose an icon, and Submit the form.
 
-You should then be able to view the "App" you've just created and scroll down to turn it into a Bot account. (WARNING: this is irreversible - make sure you make a new app here to avoid accidentally breaking something you need!)
+You should then be able to view the "App" you've just created.
+
+## The Weird Part: Converting Your App to a Bot User
+scroll down to turn it into a Bot account. (WARNING: this is irreversible - make sure you make a new app here to avoid accidentally breaking something you need!)
 
 Once you've turned the App into a Bot Account, you should have a section titled "Bot" and a Token field which you cvan "Click to Reveal".
 
@@ -35,7 +43,7 @@ Copy this token into the **BOT_TOKEN** field of your [config.js](config.js) file
 
 For more information and a better walkthrough, see https://twentysix26.github.io/Red-Docs/red_guide_bot_accounts/
 
-## The Weirdest Part: Add your Bot to the Discord Server
+## The Admin Part: Add your Bot to the Discord Server
 You will need the "Manage Server" permission on the target server to complete this next part.
 
 Now that you have your Bot User all set up, you should have it's Client ID, Client Secret, and Token.
@@ -50,7 +58,7 @@ For more information and a better walkthrough, see https://github.com/jagrosh/Mu
 ## The Hardest Part: Discovering User and Channel IDs
 Now your bot should be able to join the Discord server, but how do you know the IDs of the channels and users?
 
-One way to find these is from the URL in the browser Discord client - the last part of the URL is the numerical part of the "Snowflake" ID.
+One way to find these is from the URL in the browser Discord client - the last part of the URL is the numerical part of the "Snowflake" ID. Sadly, this does not seem to be true for Direct Messages with users.
 
 Another way is to sniff all messages with the bot to determine its ID, the ID of the admin user, and the list of channel IDs to watch.
 
