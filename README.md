@@ -81,6 +81,11 @@ Then, run a container from the `discord-notify-bot` image you just built:
 docker run --name=dispatch-notify-bot --link dispatch-mongo:dispatch-mongo -it discord-notify-bot
 ```
 
+## Viewing the Logs
+You can view the logs of the running container using the following command:
+```bash
+docker logs -f dispatch-notify-bot
+```
 # Basic Usage
 The @dispatch-notify-bot#3168 can be used to customize the notifications that you receive from the various #dispatch  channels. This bot will accept commands through private messages specifying your *watch list*. Similarly, when a notification comes up matching a word on your *watch list*, the notification from #dispatch will be forwarded to you as a private message.
 
