@@ -1,5 +1,5 @@
 # discord-notify-bot
-A super hacky Discord.js bot that will watch a set of channels on a [Discord](https://discordapp.com/) server and notify users if their search terms appear
+A super hacky Discord.js bot that will watch a set of channels on a [Discord](https://discordapp.com/) server and notify users if their search terms appear in message contents embeds
 
 # Prerequisites
 * Git
