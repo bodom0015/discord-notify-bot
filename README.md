@@ -73,12 +73,12 @@ docker build -t discord-notify-bot .
 # Run
 Run a MongoDB container to house the users' lists of watched terms:
 ```bash
-docker run --name=dispatch-mongo -it -p 27017:27017 -v /path/to/some/persisted/volume:/data/db mongo:latest
+docker run --name=dispatch-mongo -it --restart=Always -p 27017:27017 -v /path/to/some/persisted/volume:/data/db mongo:latest
 ```
 
 Then, run a container from the `discord-notify-bot` image you just built:
 ```bash
-docker run --name=dispatch-notify-bot --link dispatch-mongo:dispatch-mongo -it discord-notify-bot
+docker run --name=dispatch-notify-bot --restart=Always --link dispatch-mongo:dispatch-mongo -it discord-notify-bot
 ```
 
 ## Viewing the Logs
