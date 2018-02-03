@@ -1,14 +1,18 @@
 /** Do NOT commit this file to source control */
 /**
- * Channel IDs use the following format:   "<#123456789012345>"
- * User IDs use the following format:      "<@123456789012345>"
- * Usernames use the following format:     "@BigDaddyAdmin"
+ * Discord leverages Twitter's "Snowflake" concept to generate unique IDs
+ *
+ *
+ * Channel IDs use the following format:   '<#123456789012345>'
+ * User IDs use the following format:      '<@123456789012345>'
+ * Usernames use the following format:     '@BigDaddyAdmin'
  *    This may vary with nicknames set - untested
  *
+ *  For more details, see https://discordapp.com/developers/docs/reference
  */
 
 // The id of this Bot user
-const BOT_USER_ID = "';
+const BOT_USER_ID = '';
 
 // The id/name of this Bot's Administrator user
 const ADMIN_USER_ID = '';
