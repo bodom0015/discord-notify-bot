@@ -1,0 +1,30 @@
+{
+  "name": "discord-notify-bot",
+  "version": "0.0.1",
+  "description": "A simple Discord bot for custom notification alerts from watched channels",
+  "main": "bot.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "discord",
+    "discordjs",
+    "chat",
+    "bot",
+    "notify",
+    "notification",
+    "sound"
+  ],
+  "author": "Mike Lambert <bodom0015@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "beepbeep": "^1.2.1",
+    "discord.js": "^11.1.0",
+    "discordjs-embed-converter": "^1.2.2",
+    "mongodb": "^2.2.31",
+    "node-opus": "^0.2.6",
+    "sleep": "5.1.1",
+    "string_score": "^0.1.22"
+  }
+}
+
