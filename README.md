@@ -28,7 +28,7 @@ This will involve setting up a Bot User and adding it to the server.
 For more details on the restrictions placed on Bot Users, see https://twentysix26.github.io/Red-Docs/red_guide_bot_accounts/
 
 ## The Easy Part: Generating a new bot token
-Visit https://discordapp.com/developers/applications/me to generate a new bot token.
+Visit https://discordapp.com/developers/applications/me to generate a new application token.
 
 Click on "New App", fill in a name/description, choose an icon, and Submit the form.
 
