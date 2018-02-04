@@ -1,0 +1,18 @@
+FROM node:boron
+
+RUN apt-get -qq update && \
+    apt-get -qq install vim && \
+    apt-get -qq clean all && \
+    apt-get -qq autoclean && \
+    apt-get -qq autoremove
+
+WORKDIR /data/
+COPY package.json /data/
+RUN npm install
+COPY config.js debugger.js /data/
+RUN chmod +x ./debugger.js
+
+ENV TZ=America/Chicago
+RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
+
+CMD ["node", "./debugger.js"]

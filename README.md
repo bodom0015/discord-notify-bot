@@ -1,7 +1,12 @@
 # discord-notify-bot
 A super hacky Discord.js bot that will watch a set of channels on a [Discord](https://discordapp.com/) server and notify users if their search terms appear in message contents or embeds.
 
-**The bot currently ignores messages without any embeds.**
+# Features
+* accepts per-user commands in the form of Direct Messages
+* stores a per-user list of words to watch for in a linked MongoDB instance
+* watches for embeds in a preset list of channels and notifies users when their matches appear
+
+NOTE: **The bot currently ignores messages without any embeds.**
 
 # Prerequisites
 * Git
@@ -64,6 +69,8 @@ One way to find these is from the URL in the browser Discord client - the last p
 
 Another way is to sniff all messages with the bot to determine its ID, the ID of the admin user, and the list of channel IDs to watch.
 
+If all else fails, you can try using the Debugger to sniff Discord messages to get a feel for the formatting (see below: Running the Debugger)
+
 This will likely involve a bit of trial and error, especially if your list of watched channels changes frequently (e.g. new channels added, old channels decommissioned, etc)
 
 # Build
@@ -78,16 +85,30 @@ Run a MongoDB container to house the users' lists of watched terms:
 docker run --name=dispatch-mongo -it --restart=Always -p 27017:27017 -v /path/to/some/persisted/volume:/data/db mongo:latest
 ```
 
+NOTE: For Docker CE, the "always" may need to be lowercase.
+
 Then, run a container from the `discord-notify-bot` image you just built:
 ```bash
 docker run --name=dispatch-notify-bot --restart=Always --link dispatch-mongo:dispatch-mongo -it discord-notify-bot
 ```
+
+NOTE: For Docker CE, the "always" may need to be lowercase.
 
 ## Viewing the Logs
 You can view the logs of the running container using the following command:
 ```bash
 docker logs -f dispatch-notify-bot
 ```
+## Running the Debugger
+Included is a debugger and a Dockerfile to build it:
+```
+docker build -t discord-debugger -f Dockerfile.debug .
+docker run -it --name=discord-debugger --link=dispatch-mongo discord-debugger
+docker logs -f discord-debugger
+```
+
+The debugger is just a slimmed down version of the bot that will echo Discord messages and embeds to the console. This can be useful when determining user and channel IDs to populate the rest of your [`config.js`](config.js) file.
+
 # Basic Usage
 The @dispatch-notify-bot#3168 can be used to customize the notifications that you receive from the various #dispatch  channels. This bot will accept commands through private messages specifying your *watch list*. Similarly, when a notification comes up matching a word on your *watch list*, the notification from #dispatch will be forwarded to you as a private message.
 
@@ -125,3 +146,12 @@ Example commands that could be sent to the bot as a private message:
 Expect a lot of trial and error with these lightly-tested features:
 * Pseudo Regular Expressions: `add ?wailmer+100+%` (place the `?` operator at the start of your search term to change the behavior of `+` to match any string, instead of just a space)
 * GPS Box: `add .40.098145,-88.252202:40.101264,-88.248747` (starting a search term the `.` operator will treat it as a pair of GPS coordinates, notifies you of anything in the box formed by following their latitude/longitude lines - the example is for Hessel Park, but these can be found from the URL in Google Maps after picking a point on the map)
+
+# Modifying the Bot
+To make changes to the bot, simply modify `bot.js` and then execute the `reload.sh` script:
+```
+vi bot.js
+./reload.sh
+```
+
+This will remove your existing bot (if one is running), rebuild the Docker image, and start up a container running the new code.
